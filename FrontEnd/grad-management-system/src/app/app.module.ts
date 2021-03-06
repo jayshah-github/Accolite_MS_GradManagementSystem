@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {MatToolbarModule} from '@angular/material/toolbar'
+import {MatButtonModule} from '@angular/material/button';
 import { LoginComponent } from './login/login.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
@@ -13,19 +15,29 @@ import {
 import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SearchComponent } from './search/search.component';
+import { TrendsComponent } from './trends/trends.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    NavbarComponent,
+    SearchComponent,
+    TrendsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SocialLoginModule,
     FormsModule,
+    MatToolbarModule,
+    MatButtonModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
