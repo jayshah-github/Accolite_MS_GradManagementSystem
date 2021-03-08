@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import {MatToolbarModule} from '@angular/material/toolbar'
 import {MatButtonModule} from '@angular/material/button';
 import { LoginComponent } from './login/login.component';
+
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
-
+import {MatFormFieldModule} from '@angular/material/form-field'
 import { FormsModule } from '@angular/forms';
 import { from } from 'rxjs';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -19,6 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SearchComponent } from './search/search.component';
 import { TrendsComponent } from './trends/trends.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,12 @@ import { TrendsComponent } from './trends/trends.component';
     MatToolbarModule,
     MatButtonModule,
     HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
     BrowserAnimationsModule,
   ],
   providers: [
