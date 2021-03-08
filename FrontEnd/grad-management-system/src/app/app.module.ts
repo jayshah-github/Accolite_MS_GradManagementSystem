@@ -23,6 +23,9 @@ import { TrendsComponent } from './trends/trends.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatIconModule} from '@angular/material/icon';
+import {ReactiveFormsModule} from '@angular/forms';
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
   declarations: [
@@ -32,15 +35,19 @@ import { MatSortModule } from '@angular/material/sort';
     NavbarComponent,
     SearchComponent,
     TrendsComponent,
+    CreateComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SocialLoginModule,
     FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
     HttpClientModule,
+    MatIconModule,
+    BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
