@@ -8,7 +8,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { AddGradComponent } from '../add-grad/add-grad.component';
 
 @Component({
   selector: 'app-search',
@@ -24,7 +25,7 @@ export class SearchComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort | undefined;
   searchKey:String | undefined;
   
-  constructor(public gradService:GradService) {
+  constructor(public gradService:GradService,private dialog:MatDialog) {
 
 }
 
@@ -53,7 +54,13 @@ export class SearchComponent implements OnInit {
       this.grads.paginator.firstPage();
     }
   }
-
+onAddClick(){
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = "50%";
+  this.dialog.open(AddGradComponent,dialogConfig);
+}
 public onOpenModal(grad:Grad,mode:string):void{
   const container=document.getElementById("main-cont");
   const button =document.createElement('button');

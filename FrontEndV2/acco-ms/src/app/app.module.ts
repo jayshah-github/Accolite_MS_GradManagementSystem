@@ -31,6 +31,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox'
 import {MatSelectModule} from '@angular/material/select'
 import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
+import { AddGradComponent } from './add-grad/add-grad.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     SearchComponent,
     TrendsComponent,
     LogsComponent,
+    AddGradComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormsModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatRadioModule,
     MatDialogModule,
     MatInputModule,
     MatCardModule,

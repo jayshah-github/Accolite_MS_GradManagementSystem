@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Grad } from './grad';
@@ -28,6 +29,36 @@ export class GradService {
     
     public deleteGrads(id:number):Observable<void>{
       return this.http.delete<void>(`${this.apiServerUrl}/grad/delete/${id}`);
+    }
+
+    form: FormGroup = new FormGroup({
+      $key: new FormControl(null),
+      name: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      feedback: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.email),
+      contact: new FormControl('', [Validators.required, Validators.minLength(8)]),
+     // city: new FormControl(''),
+      gender: new FormControl('1'),
+      //department: new FormControl(0),
+      ten_join_date: new FormControl(''),
+    //  isPermanent: new FormControl(false)
+    });
+  
+    initializeFormGroup() {
+      this.form.setValue({
+        $key: null,
+        name: '',
+        description: '',
+        feedback: '',
+        email: '',
+        contact: '',
+       // city: '',
+        gender: '1',
+        //department: 0,
+        ten_join_date: '',
+      //  isPermanent: false
+      });
     }
   }
 

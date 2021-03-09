@@ -1,11 +1,11 @@
 <div class="search-div">
 
 
-  <button class="btn btn-primary"  mat-raised-button>
+  <button class="btn-mar"mat-raised-button color="primary" (click)="onAddClick()"> 
     <mat-icon >add</mat-icon>Create
-</button>
+  </button>
 
-      <mat-form-field class="search-form-field" > 
+      <mat-form-field class="search-form-field" floatLabel="never" appearance="outline"> 
        
    
         <input   matInput type="text" [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
@@ -27,7 +27,7 @@
           
         </ng-container>
           
-          <ng-container matColumnDef="actions">
+          <ng-container class="actions" matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">
                 <button  mat-icon-button 
