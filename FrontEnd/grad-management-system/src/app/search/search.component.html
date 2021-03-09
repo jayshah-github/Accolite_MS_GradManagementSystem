@@ -3,8 +3,8 @@
 
 
 <div  class="search-form-field">
-    <button mat-raised-button>
-        <mat-icon>add</mat-icon>Create
+    <button class="btn btn-primary" (click)="onOpenModal(null,'add')" data-bs-toggle="modal" data-bs-target="#exampleModal" mat-raised-button>
+        <mat-icon >add</mat-icon>Create
     </button>
     <div>
     <input   matInput type="text" [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
@@ -15,7 +15,8 @@
 </div>
 </div>
 
-<div  class="mat-elevation-z8 tableMargin">
+
+<div  id="main-cont"class="mat-elevation-z8 tableMargin">
 <mat-table [dataSource]="grads"  matSort>
     <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
@@ -26,8 +27,8 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
-            <button  mat-icon-button><mat-icon>launch</mat-icon></button> 
-            <button  mat-icon-button color="warn"><mat-icon>delete_outline</mat-icon></button> 
+            <button  mat-icon-button (click)="onOpenModal(element,'edit')"><mat-icon>launch</mat-icon></button> 
+            <button  mat-icon-button (click)="onOpenModal(element,'delete')"color="warn"><mat-icon>delete_outline</mat-icon></button> 
         
         </mat-cell>
       </ng-container>
@@ -50,3 +51,54 @@
 </mat-table>
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Add
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Ediy
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Delete
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

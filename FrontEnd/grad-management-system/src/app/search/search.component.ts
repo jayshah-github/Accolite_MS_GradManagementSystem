@@ -48,7 +48,27 @@ export class SearchComponent implements OnInit {
     }
   }
 
-
+public onOpenModal(grad:Grad,mode:string):void{
+  const container=document.getElementById("main-cont")
+  const button =document.createElement('button');
+  button.type='button';
+  button.style.display='none';
+  button.setAttribute('data-bs-toggle','modal');
+  if(mode==='add')
+  {
+    button.setAttribute('data-bs-target','#addModal');
+  }
+  if(mode==='edit')
+  {
+    button.setAttribute('data-bs-target','#editModal');
+  }
+  if(mode==='delete')
+  {
+    button.setAttribute('data-bs-target','#deleteModal');
+  }
+  container.appendChild(button);
+  button.click();
+}
   public getGrads():void{
     this.gradService.getGrads().subscribe(
       (respone:Grad[])=>{

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { CreateComponent } from './create/create.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SearchComponent } from './search/search.component';
@@ -12,6 +13,7 @@ component:DashboardComponent,
 children:[
   {path:'',component:SearchComponent},
   {path:'trends',component:TrendsComponent},
+  {path:'create',component:CreateComponent}
 ]
 ,
 canActivate:[AuthGuardGuard]
