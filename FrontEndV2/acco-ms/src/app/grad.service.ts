@@ -18,6 +18,7 @@ export class GradService {
     }
 
     public addGrads(grad:Grad):Observable<Grad>{
+      console.log(JSON.stringify(grad));
       return this.http.post<Grad>(`${this.apiServerUrl}/grad/add`,grad);
     }
 
@@ -31,15 +32,17 @@ export class GradService {
       return this.http.delete<void>(`${this.apiServerUrl}/grad/delete/${id}`);
     }
 
+    id:number;
     form: FormGroup = new FormGroup({
       $key: new FormControl(null),
+      id:new FormControl(null),
       name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       feedback: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.email),
+      email: new FormControl('',[Validators.required, Validators.email]),
       contact: new FormControl('', [Validators.required, Validators.minLength(8)]),
      // city: new FormControl(''),
-      gender: new FormControl('1'),
+     // gender: new FormControl('1'),
       //department: new FormControl(0),
       ten_join_date: new FormControl(''),
     //  isPermanent: new FormControl(false)
@@ -48,17 +51,37 @@ export class GradService {
     initializeFormGroup() {
       this.form.setValue({
         $key: null,
+        id:null,
         name: '',
         description: '',
         feedback: '',
         email: '',
         contact: '',
        // city: '',
-        gender: '1',
+       // gender: '1',
         //department: 0,
         ten_join_date: '',
       //  isPermanent: false
       });
+    }
+    populateForm(grad,id) {
+      this.form.setValue({
+        $key: id,
+        id:grad.id,
+        name: grad.name,
+        description: grad.description,
+        feedback: grad.feedback,
+        email: grad.email,
+        contact: grad.contact,
+       // city: '',
+       // gender: grad.gender,
+        //department: 0,
+        ten_join_date: grad.ten_join_date,
+      //  isPermanent: false
+      });
+    }
+    populateFormId(grad) {
+      this.id=grad.id;
     }
   }
 

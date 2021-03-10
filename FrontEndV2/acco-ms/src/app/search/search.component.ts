@@ -10,6 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import { AddGradComponent } from '../add-grad/add-grad.component';
+import { DeleteGradComponent } from '../delete-grad/delete-grad.component';
 
 @Component({
   selector: 'app-search',
@@ -55,39 +56,47 @@ export class SearchComponent implements OnInit {
     }
   }
 onAddClick(){
+  this.gradService.initializeFormGroup();
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
   dialogConfig.width = "50%";
   this.dialog.open(AddGradComponent,dialogConfig);
+  this.dialog.afterAllClosed.subscribe((res)=>{
+    this.getGrads();
+  });
 }
-public onOpenModal(grad:Grad,mode:string):void{
-  const container=document.getElementById("main-cont");
-  const button =document.createElement('button');
-  button.type='button';
-  button.style.display='none';
-  button.setAttribute('data-bs-toggle','modal');
-  if(mode==='add')
-  {
-    button.setAttribute('data-bs-target','#addModal');
-  }
-  if(mode==='edit')
-  {
-    button.setAttribute('data-bs-target','#editModal');
-  }
-  if(mode==='delete')
-  {
-    button.setAttribute('data-bs-target','#deleteModal');
-  }
-  container.appendChild(button);
-  button.click();
+onUpdateClick(row){
+  console.log(JSON.stringify(row))
+  this.gradService.populateForm(row,row.id);
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = "50%";
+  this.dialog.open(AddGradComponent,dialogConfig);
+  this.dialog.afterAllClosed.subscribe((res)=>{
+    this.getGrads();
+  });
 }
+onDeleteClick(grad){
+
+   this.gradService.populateFormId(grad);
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = "30%";
+  this.dialog.open(DeleteGradComponent,dialogConfig);
+  this.dialog.afterAllClosed.subscribe((res)=>{
+    this.getGrads();
+  });
+}
+
   public getGrads():void{
     this.gradService.getGrads().subscribe(
       (respone:Grad[])=>{
         this.grads=new MatTableDataSource(respone);
-        // this.grads.sort=this.sort;
-        // this.grads.paginator=this.paginator;
+        this.grads.sort=this.sort;
+        this.grads.paginator=this.paginator;
         this.grads.filterPredicate=(data,filter)=>{
             return this.displayedColumns.some(ele=>{
               return ele!='actions'&& data[ele].toLowerCase().indexOf(filter)!=-1;

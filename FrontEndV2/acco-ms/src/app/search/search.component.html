@@ -30,10 +30,10 @@
           <ng-container class="actions" matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <button  mat-icon-button 
+                <button (click)="onUpdateClick(row)" mat-icon-button 
                  ><mat-icon>launch</mat-icon></button> 
                 <button  mat-icon-button 
-               
+                (click)="onDeleteClick(row)"
                 color="warn"><mat-icon>delete_outline</mat-icon></button> 
             
             </mat-cell>

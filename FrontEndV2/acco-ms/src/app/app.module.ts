@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatInputModule} from '@angular/material/input'
 import {ReactiveFormsModule} from '@angular/forms';
 import { LogsComponent } from './logs/logs.component';
@@ -33,6 +34,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AddGradComponent } from './add-grad/add-grad.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { DeleteGradComponent } from './delete-grad/delete-grad.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import {MatRadioModule} from '@angular/material/radio';
     TrendsComponent,
     LogsComponent,
     AddGradComponent,
+    DeleteGradComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import {MatRadioModule} from '@angular/material/radio';
     FormsModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatSnackBarModule,
     MatRadioModule,
     MatDialogModule,
     MatInputModule,

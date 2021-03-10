@@ -1,50 +1,62 @@
+<form [formGroup]="gradService.form">
 <h1 mat-dialog-title>Add New Grad</h1>
 <div mat-dialog-content>
     <div>
+        <input type="hidden" formControlName="$key">
+    </div>
+    <div>
     <mat-form-field class="input-div"appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput placeholder="John Doe">
+        <input formControlName="name" matInput placeholder="John Doe">
+        <mat-error>This field is mandatory.</mat-error>
     </mat-form-field>
     </div>
     <div>
     <mat-form-field class="input-div"appearance="outline">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="john@gmail.com">
+        <input type="email" formControlName="email" matInput placeholder="john@gmail.com">
+        <mat-error>This field is mandatory.</mat-error>
       </mat-form-field>
     </div>
     <div>
         <mat-form-field class="input-div"appearance="outline">
             <mat-label>Contact</mat-label>
-            <input type="tel" matInput placeholder="9082177574">
+            <input formControlName="contact" type="tel" matInput placeholder="9082177574">
+            <mat-error *ngIf="gradService.form.controls['contact'].errors?.required">This field is mandatory.</mat-error>
+          <mat-error *ngIf="gradService.form.controls['contact'].errors?.minlength">Minimum 8 charactors needed.</mat-error>
           </mat-form-field>
     </div>
     <div>
         <mat-form-field class="input-div"appearance="outline">
             <mat-label>Description</mat-label>
-            <input  matInput placeholder=".....">
+            <input  formControlName="description" matInput placeholder=".....">
+            <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
     </div>
     <div>
         <mat-form-field class="input-div"appearance="outline">
             <mat-label>Feedback</mat-label>
-            <input  matInput placeholder=".....">
+            <input formControlName="feedback" matInput placeholder=".....">
+            <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
     </div>
     <div>
         <mat-form-field class="input-div"appearance="outline">
             <mat-label>Ten Join Date</mat-label>
-            <input  type="date" matInput placeholder="">
+            <input  formControlName="ten_join_date" type="date" matInput placeholder="">
+            <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
     </div>
-    <div>
-    <mat-radio-group aria-label="Select an option">
+    <!-- <div>
+    <mat-radio-group formControlName="gender" aria-label="Select an option">
         <mat-radio-button class="mar"value="1">Male</mat-radio-button>
-        <mat-radio-button class="mar" value="2">Female</mat-radio-button>
+        <mat-radio-button class="mar"value="2">Female</mat-radio-button>
       </mat-radio-group>
-    </div>
+    </div> -->
 
   <div mat-dialog-actions>
-    <button mat-button mat-dialog-close>Close</button>
-    <button mat-raised-button color="primary" >Save</button>
+    <button mat-button mat-dialog-close (click)="onClear()">Clear</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" [disabled]="gradService.form.invalid" >Save</button>
   </div>
 </div>
+</form>
