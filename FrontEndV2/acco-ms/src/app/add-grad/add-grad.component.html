@@ -1,6 +1,6 @@
-<form [formGroup]="gradService.form">
+<form [formGroup]="gradService.form" >
   <div class="header">
-<h1 mat-dialog-title>Add New Grad</h1>  
+<h1 mat-dialog-title>{{title}}</h1>  
 <button class="btn"mat-button mat-dialog-close (click)="onClose()">Close</button>
 </div>
 <div mat-dialog-content>
@@ -8,21 +8,21 @@
         <input type="hidden" formControlName="$key">
     </div>
     <div>
-    <mat-form-field class="input-div"appearance="outline">
+    <mat-form-field class="input-div"appearance="fill">
         <mat-label>Name</mat-label>
-        <input formControlName="name" matInput placeholder="John Doe">
+        <input formControlName="name"  matInput placeholder="John Doe">
         <mat-error>This field is mandatory.</mat-error>
     </mat-form-field>
     </div>
     <div>
-    <mat-form-field class="input-div"appearance="outline">
+    <mat-form-field class="input-div"appearance="fill">
         <mat-label>Email</mat-label>
         <input type="email" formControlName="email" matInput placeholder="john@gmail.com">
         <mat-error>This field is mandatory.</mat-error>
       </mat-form-field>
     </div>
     <div>
-        <mat-form-field class="input-div"appearance="outline">
+        <mat-form-field class="input-div"appearance="fill">
             <mat-label>Contact</mat-label>
             <input formControlName="contact" type="tel" matInput placeholder="9082177574">
             <mat-error *ngIf="gradService.form.controls['contact'].errors?.required">This field is mandatory.</mat-error>
@@ -30,28 +30,28 @@
           </mat-form-field>
     </div>
     <div>
-        <mat-form-field class="input-div"appearance="outline">
+        <mat-form-field class="input-div"appearance="fill">
             <mat-label>Description</mat-label>
             <input  formControlName="description" matInput placeholder=".....">
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
     </div>
     <div>
-        <mat-form-field class="input-div"appearance="outline">
+        <mat-form-field class="input-div"appearance="fill">
             <mat-label>Feedback</mat-label>
             <input formControlName="feedback" matInput placeholder=".....">
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
     </div>
     <div>
-        <mat-form-field class="input-div"appearance="outline">
+        <mat-form-field class="input-div"appearance="fill">
             <mat-label>Ten Join Date</mat-label>
             <input  formControlName="ten_join_date" type="date" matInput placeholder="">
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
     </div>
     <div>
-<mat-form-field appearance="fill">
+<mat-form-field class="input-div" appearance="fill">
   <mat-label>Joining Location</mat-label>
   <mat-select [compareWith]="objectComparisonFunction" formControlName="join_loc">
     <mat-option *ngFor="let loc of locations" [value]="loc">
@@ -61,7 +61,7 @@
 </mat-form-field>
     </div>
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field class="input-div" appearance="fill">
         <mat-label>Home Location</mat-label>
         <mat-select [compareWith]="objectComparisonFunction" formControlName="loc">
           <mat-option *ngFor="let loc of locations" [value]="loc">
@@ -71,7 +71,7 @@
       </mat-form-field>
           </div>
           <div>
-            <mat-form-field appearance="fill">
+            <mat-form-field class="input-div" appearance="fill">
               <mat-label>Institute</mat-label>
               <mat-select  [compareWith]="objectComparisonFunction" formControlName="institute">
                 <mat-option *ngFor="let insti of institutes" [value]="insti">
@@ -81,7 +81,7 @@
             </mat-form-field>
                 </div>
                 <div>
-                  <mat-form-field appearance="fill">
+                  <mat-form-field class="input-div" appearance="fill">
                     <mat-label>Skills</mat-label>
                     <mat-select [compareWith]="objectComparisonFunction" formControlName="skills" multiple>
                       <mat-option *ngFor="let skill of skills" [value]="skill">
@@ -90,12 +90,6 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-    <!-- <div>
-    <mat-radio-group formControlName="gender" aria-label="Select an option">
-        <mat-radio-button class="mar"value="1">Male</mat-radio-button>
-        <mat-radio-button class="mar"value="2">Female</mat-radio-button>
-      </mat-radio-group>
-    </div> -->
 
   <div mat-dialog-actions>
     <button mat-button mat-dialog-close (click)="onClear()">Clear</button>

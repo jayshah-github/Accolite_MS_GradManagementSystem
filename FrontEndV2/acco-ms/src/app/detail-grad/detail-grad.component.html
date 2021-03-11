@@ -1,0 +1,21 @@
+<div class="header">
+    <h1 mat-dialog-title>More Info</h1>  
+    <button class="btn"mat-button mat-dialog-close (click)="onClose()">Close</button>
+    </div>
+    <div>
+        <div mat-dialog-content>
+        <h3>Name : {{grad.name}}</h3>
+        <h3>Email : {{grad.email}}</h3>
+        <h3>Contact : {{grad.contact}}</h3>
+        <h3>Tenative Join Date : {{grad.ten_join_date}}</h3>
+        <h3>Join Loc : {{grad.join_loc.name}}</h3>
+        <h3>Home Loc : {{grad.loc.name}}</h3>
+        <h3>Institute : {{grad.institute.name}}</h3>
+        <h3>Description : {{grad.description}}</h3>
+        <h3>Feedback : {{grad.feedback}}</h3>
+        <h3>Skills :</h3>
+        <div class="skill">
+        <h4 *ngFor="let skill of grad.skills">{{skill.name}}
+        </h4>
+    </div>
+      </div>  

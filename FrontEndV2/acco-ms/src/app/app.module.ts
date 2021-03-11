@@ -35,6 +35,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AddGradComponent } from './add-grad/add-grad.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { DeleteGradComponent } from './delete-grad/delete-grad.component';
+import { DetailGradComponent } from './detail-grad/detail-grad.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { DeleteGradComponent } from './delete-grad/delete-grad.component';
     LogsComponent,
     AddGradComponent,
     DeleteGradComponent,
+    DetailGradComponent,
   ],
   imports: [
     BrowserModule,

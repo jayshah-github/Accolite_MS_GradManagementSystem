@@ -11,6 +11,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import { AddGradComponent } from '../add-grad/add-grad.component';
 import { DeleteGradComponent } from '../delete-grad/delete-grad.component';
+import { DetailGradComponent } from '../detail-grad/detail-grad.component';
 
 @Component({
   selector: 'app-search',
@@ -19,7 +20,7 @@ import { DeleteGradComponent } from '../delete-grad/delete-grad.component';
 })
 
 export class SearchComponent implements OnInit {
-  displayedColumns: string[] = [ 'name','actions'];
+  displayedColumns: string[] = [ 'name','join date','join loc','loc','institute','actions'];
   grads: MatTableDataSource<Grad> | undefined;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
@@ -61,6 +62,10 @@ onAddClick(){
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
   dialogConfig.width = "50%";
+  dialogConfig.data = {
+    id: 1,
+    title: 'Add New Grad'
+};
   this.dialog.open(AddGradComponent,dialogConfig);
   this.dialog.afterAllClosed.subscribe((res)=>{
     this.getGrads();
@@ -70,6 +75,10 @@ onUpdateClick(row){
   console.log(JSON.stringify(row))
   this.gradService.populateForm(row,row.id);
   const dialogConfig = new MatDialogConfig();
+  dialogConfig.data = {
+    id: 3,
+    title: 'Update Grad'
+};
   dialogConfig.disableClose = true;
   dialogConfig.autoFocus = true;
   dialogConfig.width = "50%";
@@ -77,6 +86,19 @@ onUpdateClick(row){
   this.dialog.afterAllClosed.subscribe((res)=>{
     this.getGrads();
   });
+}
+onInfoClick(row){
+  console.log(JSON.stringify(row))
+  this.gradService.populateForm(row,row.id);
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.data = {
+    grad:row
+};
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.width = "50%";
+  this.dialog.open(DetailGradComponent,dialogConfig);
+  
 }
 onDeleteClick(grad){
 

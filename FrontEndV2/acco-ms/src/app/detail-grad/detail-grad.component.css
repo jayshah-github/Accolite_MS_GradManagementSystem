@@ -13,4 +13,10 @@
 .mar{
     margin: 5px;
 }
+.skill{
+    display: flex;
+}
 
+.skill h4{
+    margin: 0px 10px 0px 0px;
+}

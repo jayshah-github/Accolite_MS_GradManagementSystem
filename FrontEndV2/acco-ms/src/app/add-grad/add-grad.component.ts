@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA,MatDialogRef } from '@angular/material/dialog';
 import { GradService } from '../grad.service';
 import { Institute } from '../institute';
 import { Location } from '../location';
@@ -15,9 +15,13 @@ import { Skill } from '../skill';
 })
 export class AddGradComponent implements OnInit {
   
-
+  title:String;
+  dId:any=0;
   constructor(public gradService:GradService,public dialogRef:MatDialogRef<SearchComponent>,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService, @Inject(MAT_DIALOG_DATA) data
+    ) { this.title = data.title;
+    this.dId=data.id;
+   }
 
      locations :Location[]=[];
      institutes :Institute[]=[];
