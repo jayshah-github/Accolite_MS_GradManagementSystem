@@ -3,10 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 import {MatToolbarModule} from '@angular/material/toolbar'
 import {MatButtonModule} from '@angular/material/button';
 import { LoginComponent } from './login/login.component';
-
+import {ChartsModule} from 'ng2-charts'
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import {
   GoogleLoginProvider,
@@ -36,6 +37,11 @@ import { AddGradComponent } from './add-grad/add-grad.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { DeleteGradComponent } from './delete-grad/delete-grad.component';
 import { DetailGradComponent } from './detail-grad/detail-grad.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { DoughnutChartComponent } from './doughnut-chart/doughnut-chart.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { BubbleChartComponent } from './bubble-chart/bubble-chart.component';
 
 @NgModule({
   declarations: [
@@ -49,15 +55,22 @@ import { DetailGradComponent } from './detail-grad/detail-grad.component';
     AddGradComponent,
     DeleteGradComponent,
     DetailGradComponent,
+    PieChartComponent,
+    LineChartComponent,
+    DoughnutChartComponent,
+    BarChartComponent,
+    BubbleChartComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SocialLoginModule,
     FormsModule,
+    ChartsModule,
     MatCheckboxModule,
     MatSelectModule,
     MatSnackBarModule,
+    MatGridListModule,
     MatRadioModule,
     MatDialogModule,
     MatInputModule,

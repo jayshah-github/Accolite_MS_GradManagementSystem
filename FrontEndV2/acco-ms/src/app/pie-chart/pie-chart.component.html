@@ -1,0 +1,41 @@
+
+<div class="box">
+    <div class="sec1">
+        <form>
+            <h4>Pie Chart</h4>
+            <div class="horizontal">
+            <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Select Parameter</mat-label>
+              <mat-select [(ngModel)]="selectedParam" name="food">
+                <mat-option *ngFor="let op of xParamOptions" [value]="op">
+                  {{op}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+            <div class=" marbtn"mat-dialog-actions>
+              
+                <button mat-raised-button color="primary" (click)="onShow()" type="submit">Show</button>
+              </div>
+            </div>
+          
+    </form>
+    </div>
+    <div class="sec2">
+  
+<div class="chartjs-container">
+    <canvas 
+        baseChart 
+        [data]="pieChartData" 
+        [labels]="pieChartLabels" 
+        [chartType]="pieChartType"
+        [options]="pieChartOptions" 
+        [plugins]="pieChartPlugins" 
+        [colors]="pieChartColors" 
+        [legend]="pieChartLegend">
+    </canvas>
+</div>
+    </div>
+   
+</div>

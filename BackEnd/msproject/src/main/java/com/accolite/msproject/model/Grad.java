@@ -37,13 +37,15 @@ public class Grad implements Serializable {
     private String contact;
     @Column
     private String email;
+
 //    @ManyToMany( fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "skill",
-//            joinColumns = {@JoinColumn(name = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "sub_task_id")}
-//    )
+
     @ManyToMany( fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "grad_skills",
+//            joinColumns = {@JoinColumn(name = "grad_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "skills_id")}
+//    )
     private Set<Skill> skills = new HashSet<>();
 
     public Grad() {

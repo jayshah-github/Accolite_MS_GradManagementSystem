@@ -1,10 +1,11 @@
 package com.accolite.msproject.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
-public class Institute {
+public class Institute implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

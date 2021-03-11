@@ -44,6 +44,13 @@ export class GradService {
     public getSkills():Observable<Skill[]>{
       return this.http.get<Skill[]>(`${this.apiServerUrl}/list/allSkill`);
     }
+    public getLabels(label:String):Observable<any>{
+      return this.http.get<any>(`${this.apiServerUrl}/list/chart/bar/${label}`);
+    }
+    public getLabelsPie(label:String):Observable<any>{
+      return this.http.get<any>(`${this.apiServerUrl}/list/chart/pie/${label}`);
+    }
+
 
     id:number;
     form: FormGroup = new FormGroup({

@@ -1,9 +1,10 @@
 package com.accolite.msproject.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Location {
+public class Location implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
