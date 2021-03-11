@@ -25,7 +25,7 @@ public class GradController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Grad> getGradById(@PathVariable("id") Long id){
+    public ResponseEntity<Grad> getGradById(@PathVariable("id") Integer id){
         Grad grad=gradService.findGradById(id);
         return new ResponseEntity<>(grad, HttpStatus.OK);
     }
@@ -44,7 +44,7 @@ public class GradController {
         return new ResponseEntity<>(updatedGrad,HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteGrad(@PathVariable("id") Long id){
+    public ResponseEntity<?> deleteGrad(@PathVariable("id") Integer id){
         gradService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

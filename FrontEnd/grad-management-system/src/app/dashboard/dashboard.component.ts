@@ -8,7 +8,11 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: SocialAuthService,private router: Router) { }
+  constructor(private authService: SocialAuthService,private router: Router) {  
+
+
+    
+  }
 
   ngOnInit(): void {
   }

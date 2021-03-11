@@ -11,6 +11,6 @@ public interface GradService {
  Grad addGrad(Grad grad);
  List<Grad> findAllGrads();
  Grad updateGrad(Grad grad);
- void deleteById(Long id);
- Grad findGradById(Long id);
+ void deleteById(Integer id);
+ Grad findGradById(Integer id);
 }

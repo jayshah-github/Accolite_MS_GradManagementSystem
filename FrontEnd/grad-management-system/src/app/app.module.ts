@@ -26,6 +26,8 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatIconModule} from '@angular/material/icon';
 import {ReactiveFormsModule} from '@angular/forms';
 import { CreateComponent } from './create/create.component';
+    
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { CreateComponent } from './create/create.component';
     AppRoutingModule,
     SocialLoginModule,
     FormsModule,
+    MatDialogModule,
     ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,

@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("list")
-public class InstiController {
+public class InfoController {
 
     @Autowired
     InstituteRepo instituteRepo;

@@ -1,2 +1,13 @@
-package com.accolite.msproject.repo;public interface LocationRepo {
+package com.accolite.msproject.repo;
+
+import com.accolite.msproject.model.Grad;
+import com.accolite.msproject.model.Location;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import javax.transaction.Transactional;
+
+@Repository
+@Transactional
+public interface LocationRepo extends JpaRepository<Location,Integer> {
 }

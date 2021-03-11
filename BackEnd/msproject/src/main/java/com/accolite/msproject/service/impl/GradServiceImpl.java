@@ -23,7 +23,7 @@ public class GradServiceImpl implements GradService {
 
     @Override
     public Grad addGrad(Grad grad) {
-        grad.setGrad_code(UUID.randomUUID().toString());
+
 
         return gradRepo.save(grad);
     }
@@ -39,12 +39,12 @@ public class GradServiceImpl implements GradService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         gradRepo.deleteById(id);
     }
 
     @Override
-    public Grad findGradById(Long id) {
+    public Grad findGradById(Integer id) {
         return gradRepo.findGradById(id).orElseThrow(()->new GradNotFoundException("Grad by id "+id+" was not found"));
     }
 

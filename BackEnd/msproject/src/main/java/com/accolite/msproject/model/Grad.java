@@ -2,29 +2,32 @@ package com.accolite.msproject.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Grad implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column
     private String name;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(nullable = false)
-//    private Institute institute;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false)
+    private Institute institute;
+
     @Column
     private String ten_join_date;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(nullable = false)
-//    private Location join_loc;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(nullable = false)
-//    private Location loc;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false)
+    private Location join_loc;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false)
+    private Location loc;
 
     @Column
     private String description;
@@ -34,17 +37,23 @@ public class Grad implements Serializable {
     private String contact;
     @Column
     private String email;
-    @Column
-    private String grad_code;
+//    @ManyToMany( fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "skill",
+//            joinColumns = {@JoinColumn(name = "id")},
+//            inverseJoinColumns = {@JoinColumn(name = "sub_task_id")}
+//    )
+    @ManyToMany( fetch = FetchType.EAGER)
+    private Set<Skill> skills = new HashSet<>();
 
     public Grad() {
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,13 +65,13 @@ public class Grad implements Serializable {
         this.name = name;
     }
 //
-//    public Institute getInstitute() {
-//        return institute;
-//    }
-//
-//    public void setInstitute(Institute institute) {
-//        this.institute = institute;
-//    }
+    public Institute getInstitute() {
+        return institute;
+    }
+
+    public void setInstitute(Institute institute) {
+        this.institute = institute;
+    }
 
     public String getTen_join_date() {
         return ten_join_date;
@@ -72,21 +81,13 @@ public class Grad implements Serializable {
         this.ten_join_date = ten_join_date;
     }
 
-//    public Location getJoin_loc() {
-//        return join_loc;
-//    }
-//
-//    public void setJoin_loc(Location join_loc) {
-//        this.join_loc = join_loc;
-//    }
-//
-//    public Location getLoc() {
-//        return loc;
-//    }
-//
-//    public void setLoc(Location loc) {
-//        this.loc = loc;
-//    }
+    public Location getJoin_loc() {
+        return join_loc;
+    }
+
+    public void setJoin_loc(Location join_loc) {
+        this.join_loc = join_loc;
+    }
 
     public String getDescription() {
         return description;
@@ -120,11 +121,19 @@ public class Grad implements Serializable {
         this.email = email;
     }
 
-    public String getGrad_code() {
-        return grad_code;
+    public Location getLoc() {
+        return loc;
     }
 
-    public void setGrad_code(String grad_code) {
-        this.grad_code = grad_code;
+    public void setLoc(Location loc) {
+        this.loc = loc;
+    }
+
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
     }
 }
