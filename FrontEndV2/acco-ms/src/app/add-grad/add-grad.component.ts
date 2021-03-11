@@ -1,8 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { GradService } from '../grad.service';
+import { Institute } from '../institute';
+import { Location } from '../location';
 import { NotificationService } from '../notification.service';
 import { SearchComponent } from '../search/search.component';
+import { Skill } from '../skill';
 
 @Component({
   selector: 'app-add-grad',
@@ -15,8 +19,47 @@ export class AddGradComponent implements OnInit {
   constructor(public gradService:GradService,public dialogRef:MatDialogRef<SearchComponent>,
     private notificationService: NotificationService) { }
 
+     locations :Location[]=[];
+     institutes :Institute[]=[];
+     
+     skills :Skill[]=[];
   ngOnInit(): void {
-    
+    this.getLocs();
+    this.getInsti();
+    this.getSkills();
+  }
+  public getLocs():void{
+    this.gradService.getLocations().subscribe(
+      (respone :any)=>{
+        this.locations=respone;
+      },
+      (err:HttpErrorResponse)=>{
+        alert(err.message);
+      }
+    );
+  }
+  public getInsti():void{
+    this.gradService.getInstitutes().subscribe(
+      (respone :any)=>{
+        this.institutes=respone;
+      },
+      (err:HttpErrorResponse)=>{
+        alert(err.message);
+      }
+    );
+  }
+  public getSkills():void{
+    this.gradService.getSkills().subscribe(
+      (respone :any)=>{
+        this.skills=respone;
+      },
+      (err:HttpErrorResponse)=>{
+        alert(err.message);
+      }
+    );
+  }
+  public objectComparisonFunction = function( option, value ) : boolean {
+    return option.id === value.id;
   }
   onClear() {
     this.gradService.form.reset();

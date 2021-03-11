@@ -1,3 +1,7 @@
+import { Institute } from "./institute";
+import { Location } from "./location";
+import { Skill } from "./skill";
+
 export interface Grad{
     id:number;
     name:string;
@@ -6,5 +10,8 @@ export interface Grad{
     feedback:string;
     contact:string;
     email:string;
-    grad_code:string;
+    join_loc:Location;
+    loc:Location;
+    institute:Institute;
+    skills: Skill[];
 }
