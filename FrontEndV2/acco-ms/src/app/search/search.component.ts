@@ -19,13 +19,13 @@ import { DetailGradComponent } from '../detail-grad/detail-grad.component';
   styleUrls: ['./search.component.css']
 })
 
-export class SearchComponent implements OnInit {
-  displayedColumns: string[] = [ 'name','join date','join loc','loc','institute','actions'];
-  grads: MatTableDataSource<Grad> | undefined;
+export class SearchComponent implements OnInit,AfterViewInit  {
+  displayedColumns: string[] = [ 'name','ten_join_date','join_loc','loc','institute','actions'];
+  grads: MatTableDataSource<Grad> ;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
-  @ViewChild(MatSort) sort: MatSort | undefined;
-  searchKey:String | undefined;
+  @ViewChild(MatPaginator) paginator: MatPaginator ;
+  @ViewChild(MatSort) sort: MatSort ;
+  searchKey:String ;
   
   constructor(public gradService:GradService,private dialog:MatDialog) {
 
@@ -35,20 +35,42 @@ export class SearchComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getGrads(); 
+    this.gradService.getGrads().subscribe(
+      (respone:Grad[])=>{
+        this.grads=new MatTableDataSource(respone);
+        this.grads.sort=this.sort;
+        this.grads.paginator=this.paginator;
+        this.grads.filterPredicate = (data, filter: string)  => {
+          const accumulator = (currentTerm, key) => {
+            return key === 'institute' ? currentTerm + data.institute.name : currentTerm + data[key]
+            ||'join_loc' ? currentTerm + data.join_loc.name : currentTerm + data[key]
+            ||'loc' ? currentTerm + data.loc.name : currentTerm + data[key];
+          
+          };
+          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+          // Transform the filter by converting it to lowercase and removing whitespace.
+          const transformedFilter = filter.trim().toLowerCase();
+          return dataStr.indexOf(transformedFilter) !== -1;
+        };
+      },
+      (err:HttpErrorResponse)=>{
+        alert(err.message);
+      }
+    );
     
   }
 
- 
+  ngAfterViewInit() {
+    this.grads.paginator = this.paginator;
+    this.grads.sort = this.sort;
+  }
 
   onSearchClear(){
     this.searchKey="";
     this.applyFilter();
   }
-  applyFilter(
-    //event: Event
-    ) {
-  //  const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter() {
+     //const filterValue = (event.target as HTMLInputElement).value;
     this.grads.filter = this.searchKey.trim().toLowerCase();
  
     
@@ -117,13 +139,13 @@ onDeleteClick(grad){
     this.gradService.getGrads().subscribe(
       (respone:Grad[])=>{
         this.grads=new MatTableDataSource(respone);
-        this.grads.sort=this.sort;
-        this.grads.paginator=this.paginator;
-        this.grads.filterPredicate=(data,filter)=>{
-            return this.displayedColumns.some(ele=>{
-              return ele!='actions'&& data[ele].toLowerCase().indexOf(filter)!=-1;
-            })
-        };
+       // this.grads.sort=this.sort;
+       // this.grads.paginator=this.paginator;
+        // this.grads.filterPredicate=(data,filter)=>{
+        //     return this.displayedColumns.some(ele=>{
+        //       return ele!='actions'&& data[ele].toLowerCase().indexOf(filter)!=-1;
+        //     })
+        // };
       },
       (err:HttpErrorResponse)=>{
         alert(err.message);
