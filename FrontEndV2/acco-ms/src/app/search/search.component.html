@@ -8,7 +8,7 @@
       <mat-form-field class="search-form-field" floatLabel="never" appearance="outline"> 
        
    
-        <input   matInput type="text" [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+        <input   matInput type="text" [(ngModel)]="searchKey" placeholder="Search for name/date/loc/skills/institute/description/feedback/contact" autocomplete="off" (keyup)="applyFilter()">
     <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onSearchClear()">
         <mat-icon>close</mat-icon>
     </button>  
@@ -26,6 +26,13 @@
             <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
           
         </ng-container>
+        <ng-container class="ellipsis multiline" matColumnDef="skills">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Skills</mat-header-cell>
+          <mat-cell  *matCellDef="let element"> 
+            <span class="marArray" *ngFor="let skill of element.skills">{{skill.name}}</span>
+           </mat-cell>
+        
+        </ng-container>
         <ng-container matColumnDef="ten_join_date">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Ten Join Date</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.ten_join_date}} </mat-cell>
@@ -36,16 +43,12 @@
         <mat-cell *matCellDef="let element"> {{element.join_loc.name}} </mat-cell>
       
     </ng-container>
-    <ng-container matColumnDef="loc">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Home Location</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.loc.name}} </mat-cell>
-    
-  </ng-container>
   <ng-container matColumnDef="institute">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Institute</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.institute.name}} </mat-cell>
   
 </ng-container>
+
           <ng-container class="actions" matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let row">

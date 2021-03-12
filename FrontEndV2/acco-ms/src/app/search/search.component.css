@@ -1,6 +1,8 @@
 .table-margin{
     margin: 0px 10px 10px 10px;
 }
+
+
 .mat-form-field {
     font-size: 14px;
     width: 100%;
@@ -8,6 +10,21 @@
   
   .hide{
     display: none;
+}
+
+.mararray{
+  margin-right: 2px;
+}
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ellipsis.multiline {
+  white-space: normal;
+}
+div.span:hover {
+  overflow: visible;
 }
   mat-footer-row mat-footer-cell{
     justify-content: center;

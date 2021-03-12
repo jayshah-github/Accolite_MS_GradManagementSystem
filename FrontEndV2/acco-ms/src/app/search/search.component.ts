@@ -19,8 +19,8 @@ import { DetailGradComponent } from '../detail-grad/detail-grad.component';
   styleUrls: ['./search.component.css']
 })
 
-export class SearchComponent implements OnInit,AfterViewInit  {
-  displayedColumns: string[] = [ 'name','ten_join_date','join_loc','loc','institute','actions'];
+export class SearchComponent implements OnInit  {
+  displayedColumns: string[] = [ 'name','skills','ten_join_date','join_loc','institute','actions'];
   grads: MatTableDataSource<Grad> ;
 
   @ViewChild(MatPaginator) paginator: MatPaginator ;
@@ -40,29 +40,16 @@ export class SearchComponent implements OnInit,AfterViewInit  {
         this.grads=new MatTableDataSource(respone);
         this.grads.sort=this.sort;
         this.grads.paginator=this.paginator;
-        this.grads.filterPredicate = (data, filter: string)  => {
-          const accumulator = (currentTerm, key) => {
-            return key === 'institute' ? currentTerm + data.institute.name : currentTerm + data[key]
-            ||'join_loc' ? currentTerm + data.join_loc.name : currentTerm + data[key]
-            ||'loc' ? currentTerm + data.loc.name : currentTerm + data[key];
-          
-          };
-          const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
-          // Transform the filter by converting it to lowercase and removing whitespace.
-          const transformedFilter = filter.trim().toLowerCase();
-          return dataStr.indexOf(transformedFilter) !== -1;
-        };
+        this.grads.filterPredicate = (data: any, filter) => {
+          const dataStr =JSON.stringify(data).toLowerCase();
+          return dataStr.indexOf(filter) != -1; 
+        }
       },
       (err:HttpErrorResponse)=>{
         alert(err.message);
       }
     );
     
-  }
-
-  ngAfterViewInit() {
-    this.grads.paginator = this.paginator;
-    this.grads.sort = this.sort;
   }
 
   onSearchClear(){
