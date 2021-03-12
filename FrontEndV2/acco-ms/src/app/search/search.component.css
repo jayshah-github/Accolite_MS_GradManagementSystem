@@ -11,9 +11,17 @@
   .hide{
     display: none;
 }
+mat-cell > span.ellipsis {
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space: nowrap;
 
+}
+.break{
+  word-break: break-all;
+}
 .mararray{
-  margin-right: 2px;
+  margin-right: 4px;
 }
 .ellipsis {
   white-space: nowrap;

@@ -26,11 +26,13 @@
             <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
           
         </ng-container>
-        <ng-container class="ellipsis multiline" matColumnDef="skills">
+        <ng-container  matColumnDef="skills">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Skills</mat-header-cell>
-          <mat-cell  *matCellDef="let element"> 
-            <span class="marArray" *ngFor="let skill of element.skills">{{skill.name}}</span>
-           </mat-cell>
+          <mat-cell class="break" *matCellDef="let element"> 
+            <span class="break">
+            <span class="mararray" *ngFor="let skill of element.skills">{{skill.name}}</span>
+          </span> 
+          </mat-cell>
         
         </ng-container>
         <ng-container matColumnDef="ten_join_date">
