@@ -1,0 +1,22 @@
+.input-div{
+    width: 100%;
+}
+.btn{
+    height: 32px;
+    margin-right: 20px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+   
+}
+.mar{
+    margin: 5px;
+}
+.skill{
+    display: flex;
+}
+
+.skill h4{
+    margin: 0px 10px 0px 0px;
+}
