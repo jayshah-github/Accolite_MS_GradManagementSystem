@@ -12,6 +12,7 @@ import java.util.Optional;
 @Transactional
 public interface GradRepo extends JpaRepository<Grad,Integer> {
     Optional<Grad> findGradById(Integer id);
+
     @Query("select year(ten_join_date) as year from Grad group by year")
     List<String> getYearLabels();
 }

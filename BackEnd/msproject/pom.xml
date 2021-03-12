@@ -36,13 +36,90 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.sonarsource.scanner.maven</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>3.2</version>
+		</dependency>
 	</dependencies>
 
+
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+
+			<properties>
+				<java.version>1.8</java.version>
+				<sonar.login>admin</sonar.login>
+				<sonar.password>root</sonar.password>
+				<sonar.language>java</sonar.language>
+				<sonar.tests>src/test/java</sonar.tests>
+				<sonar.projectKey>sonar-test</sonar.projectKey>
+				<sonar.host.url>http://localhost:9000</sonar.host.url>
+				<sonar.java.binaries>target/classes</sonar.java.binaries>
+				<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+				<sonar.language>java</sonar.language>
+				<sonar.junit.reportsPath>target/surefire-reports</sonar.junit.reportsPath>
+				<sonar.surefire.reportsPaths>target/surefire-reports</sonar.surefire.reportsPaths>
+				<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../coverage/target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>  <sonar.binaries>target/classes</sonar.binaries>
+				<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+				<sonar.verbose>true</sonar.verbose>
+			</properties>
+
+		</profile>
+	</profiles>
 	<build>
 		<plugins>
+
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin </artifactId>
+				<version>0.8.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<!-- attached to Maven test phase -->
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.4.0.905</version>
 			</plugin>
 		</plugins>
 	</build>
