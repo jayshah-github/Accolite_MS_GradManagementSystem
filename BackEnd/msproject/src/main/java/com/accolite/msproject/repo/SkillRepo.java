@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.accolite.msproject.util.Queries.SKILL_LABEL;
+
 @Repository
 @Transactional
 public interface SkillRepo extends JpaRepository<Skill,Integer> {
-    @Query("select s.name from Skill s")
+    @Query(SKILL_LABEL)
     List<String> getLabels();
 
-//    @Query("select count(*) from grad_skills group by skills_id")
-//    Integer[] getSkillData();
 
 }

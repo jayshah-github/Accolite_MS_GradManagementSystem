@@ -21,6 +21,8 @@ import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.accolite.msproject.util.Queries.*;
+
 @RestController
 @RequestMapping("list")
 public class InfoController {
@@ -65,38 +67,36 @@ public class InfoController {
         List<BigDecimal> data ;
         Query nativeQuery ;
 
-        if(label.equals("skill"))
+        if(label.equals(SKILL_L))
         {
             labels=skillRepo.getLabels();
-            nativeQuery=entityManager.createNativeQuery("select count(*) from grad_skills group by skills_id");
+            nativeQuery=entityManager.createNativeQuery(SKILL_BAR_DATA);
         }
-        else if(label.equals("institute"))
+        else if(label.equals(INSTI_L))
         {
             labels=instituteRepo.getLabels();
-            nativeQuery=entityManager.createNativeQuery("select count(*) from Grad group by institute_id");
+            nativeQuery=entityManager.createNativeQuery(INSTI_BAR_DATA);
 
-        }  else if(label.equals("join year")){
+        }  else if(label.equals(YEAR_L)){
             labels= gradRepo.getYearLabels();
-            nativeQuery=entityManager.createNativeQuery("select count(*) from Grad  group by (select year(ten_join_date) as year)");
+            nativeQuery=entityManager.createNativeQuery(YEAR_BAR_DATA);
 
         }
         else{
             labels=locationRepo.getLabels();
-            nativeQuery=entityManager.createNativeQuery("select count(*) from grad group by join_loc_id");
+            nativeQuery=entityManager.createNativeQuery(LOC_BAR_DATA);
 
         }
 
 
         data= nativeQuery.getResultList();
-        chartData.setLabel("Graduates");
+        chartData.setLabel(GRAD_L);
         chartData.setData(data);
 
-        //setting value
         chart.setLabels(labels);
         chart.setChartData(chartData);
         return new ResponseEntity<>(chart, HttpStatus.OK);
 
-        //return new ResponseEntity<>(chart, HttpStatus.OK);
     }
     @GetMapping("/chart/pie/{label}")
     public ResponseEntity<Chart> getChartPieData(@PathVariable("label") String label){
@@ -107,39 +107,38 @@ public class InfoController {
         List<BigDecimal> data ;
         Query nativeQuery ;
 
-        if(label.equals("skill"))
+        if(label.equals(SKILL_L))
         {
             labels=skillRepo.getLabels();
-            nativeQuery=entityManager.createNativeQuery("select (count(*)*100/(Select Count(*) From grad_skills)) from grad_skills group by skills_id;");
+            nativeQuery=entityManager.createNativeQuery(SKILL_PIE_DATA);
         }
-        else if(label.equals("institute"))
+        else if(label.equals(INSTI_L))
         {
             labels=instituteRepo.getLabels();
-            nativeQuery=entityManager.createNativeQuery("select (count(*)*100/(Select Count(*) From grad)) from grad group by institute_id");
+            nativeQuery=entityManager.createNativeQuery(INSTI_PIE_DATA);
 
         }
-        else if(label.equals("join year")){
+        else if(label.equals(YEAR_L)){
             labels= gradRepo.getYearLabels();
-            nativeQuery=entityManager.createNativeQuery("select (count(id)*100/(Select Count(*) From grad)) from grad group by (select year(ten_join_date) as year)");
+            nativeQuery=entityManager.createNativeQuery(YEAR_PIE_DATA);
 
         }
         else{
             labels=locationRepo.getLabels();
-            nativeQuery=entityManager.createNativeQuery("select (count(*)*100/(Select Count(*) From grad)) from grad group by join_loc_id");
+            nativeQuery=entityManager.createNativeQuery(LOC_PIE_DATA);
 
         }
 
 
         data= nativeQuery.getResultList();
-        chartData.setLabel("Graduates");
+        chartData.setLabel(GRAD_L);
         chartData.setData(data);
 
-        //setting value
         chart.setLabels(labels);
         chart.setChartData(chartData);
         return new ResponseEntity<>(chart, HttpStatus.OK);
 
-        //return new ResponseEntity<>(chart, HttpStatus.OK);
+
     }
 
 }

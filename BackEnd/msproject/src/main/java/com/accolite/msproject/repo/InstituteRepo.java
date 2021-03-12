@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.accolite.msproject.util.Queries.INSTI_LABEL;
+
 @Repository
 @Transactional
 public interface InstituteRepo extends JpaRepository<Institute,Integer> {
-    @Query("select s.name from Institute s")
+    @Query(INSTI_LABEL)
     List<String> getLabels();
 }

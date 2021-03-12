@@ -9,9 +9,11 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.accolite.msproject.util.Queries.LOC_LABEL;
+
 @Repository
 @Transactional
 public interface LocationRepo extends JpaRepository<Location,Integer> {
-    @Query("select s.name from Location s")
+    @Query(LOC_LABEL)
     List<String> getLabels();
 }

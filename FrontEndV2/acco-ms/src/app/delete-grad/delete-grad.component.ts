@@ -23,7 +23,7 @@ export class DeleteGradComponent implements OnInit {
         this.gradService.deleteGrads(this.gradService.id).subscribe((res)=>{
           this.gradService.form.reset();
           this.gradService.initializeFormGroup();
-          this.notificationService.success(':: deleted successfully');
+          this.notificationService.success(':: deleted successfully refresh if change not reflected');
           this.onClose();   
         });
   }

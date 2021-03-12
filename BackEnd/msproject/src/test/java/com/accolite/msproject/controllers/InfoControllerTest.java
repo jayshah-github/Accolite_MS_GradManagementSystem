@@ -11,6 +11,8 @@ import com.accolite.msproject.repo.InstituteRepo;
 import com.accolite.msproject.repo.LocationRepo;
 import com.accolite.msproject.repo.SkillRepo;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,14 +20,20 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static com.accolite.msproject.util.Queries.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,9 +44,14 @@ class InfoControllerTest {
     MockMvc mockMvc;
     @MockBean
     InstituteRepo instituteRepo;
-
     @MockBean
-    EntityManagerFactory entityManager;
+    Query query;
+    @MockBean
+    EntityManagerFactory entityManagerFactory;
+    @Mock
+    EntityManager entityManager;
+
+
     @MockBean
     LocationRepo locationRepo;
 
@@ -99,12 +112,178 @@ class InfoControllerTest {
 
         System.out.println(result.getResponse().getContentAsString());
     }
+
+
     @Test
-    void getChartBarData() {
+    void getChartPieDataSkill() throws Exception {
+        List<BigDecimal> dataList=new ArrayList<>();
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        List<String> list=Arrays.asList(EntityData.getSkillsData());
+        when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
+        when(skillRepo.getLabels()).thenReturn(list);
+        when(entityManager.createNativeQuery(SKILL_PIE_DATA)).thenReturn(query);
+        when(query.getResultList()).thenReturn(dataList);
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/list/chart/pie/"+SKILL_L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.chartData.label").value(GRAD_L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.labels").value(list))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
     }
 
     @Test
-    void getChartPieData() {
+    void getChartPieDataLoc() throws Exception {
+        List<BigDecimal> dataList=new ArrayList<>();
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        List<String> list=Arrays.asList(EntityData.getLocData());
+        when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
+        when(locationRepo.getLabels()).thenReturn(list);
+        when(entityManager.createNativeQuery(LOC_PIE_DATA)).thenReturn(query);
+        when(query.getResultList()).thenReturn(dataList);
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/list/chart/pie/loc"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.chartData.label").value(GRAD_L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.labels").value(list))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void getChartPieDataYear() throws Exception {
+        List<BigDecimal> dataList=new ArrayList<>();
+        dataList.add(BigDecimal.valueOf(100));
+
+        List<String> list=Arrays.asList(new String[]{"2021"});
+        when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
+        when(gradRepo.getYearLabels()).thenReturn(list);
+        when(entityManager.createNativeQuery(YEAR_PIE_DATA)).thenReturn(query);
+        when(query.getResultList()).thenReturn(dataList);
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/list/chart/pie/"+YEAR_L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.chartData.label").value(GRAD_L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.labels").value(list))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void getChartPieDataInsti() throws Exception {
+        List<BigDecimal> dataList=new ArrayList<>();
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        List<String> list=Arrays.asList(EntityData.getSkillsData());
+        when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
+        when(instituteRepo.getLabels()).thenReturn(list);
+        when(entityManager.createNativeQuery(INSTI_PIE_DATA)).thenReturn(query);
+        when(query.getResultList()).thenReturn(dataList);
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/list/chart/pie/"+INSTI_L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.chartData.label").value(GRAD_L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.labels").value(list))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+    ///bar
+
+    @Test
+    void getChartBarDataSkill() throws Exception {
+        List<BigDecimal> dataList=new ArrayList<>();
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        List<String> list=Arrays.asList(EntityData.getSkillsData());
+        when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
+        when(skillRepo.getLabels()).thenReturn(list);
+        when(entityManager.createNativeQuery(SKILL_BAR_DATA)).thenReturn(query);
+        when(query.getResultList()).thenReturn(dataList);
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/list/chart/bar/"+SKILL_L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.chartData.label").value(GRAD_L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.labels").value(list))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void getChartBarDataLoc() throws Exception {
+        List<BigDecimal> dataList=new ArrayList<>();
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        List<String> list=Arrays.asList(EntityData.getLocData());
+        when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
+        when(locationRepo.getLabels()).thenReturn(list);
+        when(entityManager.createNativeQuery(LOC_BAR_DATA)).thenReturn(query);
+        when(query.getResultList()).thenReturn(dataList);
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/list/chart/bar/loc"))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.chartData.label").value(GRAD_L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.labels").value(list))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void getChartBarDataYear() throws Exception {
+        List<BigDecimal> dataList=new ArrayList<>();
+        dataList.add(BigDecimal.valueOf(100));
+
+        List<String> list=Arrays.asList(new String[]{"2021"});
+        when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
+        when(gradRepo.getYearLabels()).thenReturn(list);
+        when(entityManager.createNativeQuery(YEAR_BAR_DATA)).thenReturn(query);
+        when(query.getResultList()).thenReturn(dataList);
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/list/chart/bar/"+YEAR_L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.chartData.label").value(GRAD_L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.labels").value(list))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
+    }
+
+    @Test
+    void getChartBarDataInsti() throws Exception {
+        List<BigDecimal> dataList=new ArrayList<>();
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        dataList.add(BigDecimal.valueOf(20));
+        List<String> list=Arrays.asList(EntityData.getSkillsData());
+        when(entityManagerFactory.createEntityManager()).thenReturn(entityManager);
+        when(instituteRepo.getLabels()).thenReturn(list);
+        when(entityManager.createNativeQuery(INSTI_BAR_DATA)).thenReturn(query);
+        when(query.getResultList()).thenReturn(dataList);
+        MvcResult result= mockMvc.perform(MockMvcRequestBuilders.get("/list/chart/bar/"+INSTI_L))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.chartData.label").value(GRAD_L))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.labels").value(list))
+                .andReturn();
+
+        System.out.println(result.getResponse().getContentAsString());
     }
 
 

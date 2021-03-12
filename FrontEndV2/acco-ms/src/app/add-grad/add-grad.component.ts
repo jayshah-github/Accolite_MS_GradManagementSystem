@@ -76,7 +76,7 @@ export class AddGradComponent implements OnInit {
           this.gradService.addGrads(this.gradService.form.value).subscribe((res)=>{
             console.log(res);
           });
-          this.notificationService.success(':: Submitted successfully');
+          this.notificationService.success('Added successfully Refresh Page if Change not reflected');
           this.onClose();
         }else
 
@@ -87,7 +87,7 @@ export class AddGradComponent implements OnInit {
         });
       this.gradService.form.reset();
       this.gradService.initializeFormGroup();
-      this.notificationService.success(':: updated successfully');
+      this.notificationService.success('Updated successfully Refresh Page if Change not reflected');
       this.onClose();
     }
   }
