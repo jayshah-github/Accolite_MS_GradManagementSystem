@@ -1,3 +1,2 @@
 # Accolite_MS_GradManagementSystem
-# A Graduate Management System built using Angular and Spring
-# Use accolite digital email id to login via google else you wont be able to login
+# Login is restricted to accolite digital email ids so please use accolite digital email id to login via google else you wont be able to login
