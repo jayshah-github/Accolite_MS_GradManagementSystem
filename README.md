@@ -4,7 +4,9 @@ Accolite-MS Project
 
 JAY SHAH
 Website Pictures:
+
 Login
+
 ![WhatsApp Image 2021-03-13 at 1 26 20 AM (1)](https://user-images.githubusercontent.com/61539012/111079603-ac3c1b00-8520-11eb-86b9-157d833bc94a.jpeg)
 
 ![WhatsApp Image 2021-03-13 at 1 26 29 AM (1)](https://user-images.githubusercontent.com/61539012/111079617-b65e1980-8520-11eb-90ed-42532875b0b6.jpeg)
@@ -31,6 +33,7 @@ More Info ( i button)
 Update Grad (arrow box):
 
 ![WhatsApp Image 2021-03-13 at 1 27 10 AM](https://user-images.githubusercontent.com/61539012/111079657-e0174080-8520-11eb-9c53-4cd105017399.jpeg)
+
 ![WhatsApp Image 2021-03-14 at 11 58 46 PM](https://user-images.githubusercontent.com/61539012/111079725-3dab8d00-8521-11eb-88ac-b9709270e08a.jpeg)
 
 
@@ -47,6 +50,7 @@ Delete Grad:
 Trends select a filter then click on show Bar and Pie chart
 
 ![WhatsApp Image 2021-03-13 at 1 27 28 AM](https://user-images.githubusercontent.com/61539012/111079682-fd4c0f00-8520-11eb-93fe-dd1fd6c0ff67.jpeg)
+
 ![WhatsApp Image 2021-03-13 at 1 27 35 AM](https://user-images.githubusercontent.com/61539012/111079687-02a95980-8521-11eb-9280-b8f0434fdc6f.jpeg)
 
 Test Coverage: 97%
